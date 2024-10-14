@@ -51,7 +51,9 @@ export default function FiftyFifty() {
   };
 
   const deleteCategory = (categoryId: string) => {
-    setCategories(categories.filter((category) => category._id !== categoryId));
+    setCategories(
+      categories.filter((category) => category.name !== categoryId)
+    );
   };
 
   const addTag = async (tag: Tag) => {
@@ -59,7 +61,7 @@ export default function FiftyFifty() {
   };
 
   const deleteTag = (tagId: string) => {
-    setTags(tags.filter((tag) => tag._id !== tagId));
+    setTags(tags.filter((tag) => tag.name !== tagId));
   };
 
   // Cargar categorías y etiquetas al montar el componente

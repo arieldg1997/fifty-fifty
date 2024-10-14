@@ -25,12 +25,12 @@ export async function GET(request) {
 export async function POST(request) {
   const categoriesCollection = await connectToMongoDB();
   const newCategory = await request.json(); // Asumiendo que el cuerpo de la petición contiene un JSON con el nuevo category
-  await categoriesCollection.insertOne({
+  const category = await categoriesCollection.insertOne({
     name: newCategory.name,
     createdAt: new Date(),
     monthlyObjective: newCategory.monthlyObjective,
   });
-  return new Response("Category created", { status: 201 });
+  return new Response("Category created", { status: 201 }); // Devuelve el nuevo category creado
 }
 
 // DELETE a categories by name

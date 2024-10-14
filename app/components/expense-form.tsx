@@ -15,6 +15,8 @@ import {
 import { Expense, Category } from "./fifty-fifty";
 import { X } from "lucide-react";
 import Swal from "sweetalert2";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ExclamationTriangleIcon, RocketIcon } from "@radix-ui/react-icons";
 
 type ExpenseFormProps = {
   onAddExpense: (expense: Expense) => void;
@@ -119,14 +121,18 @@ export function ExpenseForm({ onAddExpense, categories }: ExpenseFormProps) {
   return (
     <>
       {message.type === "success" && message.message !== "" && (
-        <div className="bg-success text-white p-4 rounded-lg shadow">
-          <p>{message.message}</p>
-        </div>
+        <Alert>
+          <RocketIcon className="h-4 w-4" />
+          <AlertTitle>Expense created successfully</AlertTitle>
+          <AlertDescription>{message.message}</AlertDescription>
+        </Alert>
       )}
       {message.type === "error" && (
-        <div className="bg-error text-white p-4 rounded-lg shadow">
-          <p>{message.message}</p>
-        </div>
+        <Alert variant="destructive">
+          <ExclamationTriangleIcon className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{message.message}</AlertDescription>
+        </Alert>
       )}
       <form
         onSubmit={handleSubmit}

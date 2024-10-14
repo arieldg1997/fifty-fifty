@@ -50,6 +50,7 @@ export function AdminPanel({
 
     const response = await fetch("/api/tags");
     const data: Tag[] = await response.json();
+    onAddTag(data[data.length - 1]);
     setNewTag("");
     Swal.close();
     Swal.fire({
@@ -81,6 +82,7 @@ export function AdminPanel({
 
       const response = await fetch("/api/tags");
       const data: Tag[] = await response.json();
+      onDeleteTag(tagName);
       Swal.close();
 
       // Mostrar una alerta de éxito al eliminar el tag
@@ -106,6 +108,9 @@ export function AdminPanel({
         }),
       });
       if (response.ok) {
+        const response = await fetch("/api/categories");
+        const data: Category[] = await response.json();
+        onAddCategory(data[data.length - 1]);
         setNewCategory("");
         setNewCategoryObjective("");
 
@@ -139,7 +144,7 @@ export function AdminPanel({
         body: JSON.stringify({ name: categoryToRemove }),
       });
       Swal.close();
-
+      onDeleteCategory(categoryToRemove);
       Swal.fire({
         title: "¡Eliminada!",
         text: `La categoría "${categoryToRemove}" ha sido eliminada.`,
